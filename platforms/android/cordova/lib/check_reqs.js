@@ -366,9 +366,10 @@ module.exports.run = function () {
         console.log('ANDROID_HOME=' + process.env['ANDROID_HOME']);
         console.log('JAVA_HOME=' + process.env['JAVA_HOME']);
 
-        if (!values[0]) {
-            throw new CordovaError('Requirements check failed for JDK 1.8 or greater');
-        }
+//PASHPATCH
+//        if (!values[0]) {
+//            throw new CordovaError('Requirements check failed for JDK 1.8 or greater');
+//        }
 
         if (!values[1]) {
             throw new CordovaError('Requirements check failed for Android SDK');

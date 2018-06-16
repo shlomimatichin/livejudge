@@ -1,21 +1,50 @@
-var dingSound;
-var wrongSound;
-var goSound;
-var endSound;
+var mediaSounds = {};
 var app = {
     initialize: function() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     },
 
     onDeviceReady: function() {
-        dingSound = new Media("wav/ding.wav");
-        wrongSound = new Media("wav/wrong.wav");
-        goSound = new Media("wav/go.wav");
-        endSound = new Media("wav/end.wav");
+        if( window.plugins && window.plugins.NativeAudio ) {
+            console.info("Native audio");
+            window.plugins.NativeAudio.preloadSimple('ding', 'wav/ding.wav', function(msg){
+            }, function(msg){
+                console.log( 'error: ' + msg );
+            });
+            window.plugins.NativeAudio.preloadSimple('wrong', 'wav/wrong.wav', function(msg){
+            }, function(msg){
+                console.log( 'error: ' + msg );
+            });
+            window.plugins.NativeAudio.preloadSimple('go', 'wav/go.wav', function(msg){
+            }, function(msg){
+                console.log( 'error: ' + msg );
+            });
+            window.plugins.NativeAudio.preloadSimple('end', 'wav/end.wav', function(msg){
+            }, function(msg){
+                console.log( 'error: ' + msg );
+            });
+        } else {
+            console.info("Media audio");
+            mediaSounds['ding'] = new Media("wav/ding.wav");
+            mediaSounds['wrong'] = new Media("wav/wrong.wav");
+            mediaSounds['go'] = new Media("wav/go.wav");
+            mediaSounds['end'] = new Media("wav/end.wav");
+        }
     }
 };
 
 app.initialize();
+
+function playAudio(name) {
+    if( window.plugins && window.plugins.NativeAudio ) {
+        window.plugins.NativeAudio.stop(name);
+        window.plugins.NativeAudio.play(name);
+    } else {
+        mediaSounds[name].stop();
+        mediaSounds[name].seekTo(0);
+        mediaSounds[name].play();
+    }
+}
 
 var counter1;
 var counter2;
@@ -57,17 +86,13 @@ function start() {
     startedAt = new Date();
     updateDisplay();
     armTimer();
-    goSound.stop();
-    goSound.seekTo(0);
-    goSound.play();
+    playAudio('go');
 }
 function armTimer() {
     timerHandle = setTimeout(function() {
         updateDisplay();
         if (finished) {
-            endSound.stop();
-            endSound.seekTo(0);
-            endSound.play();
+            playAudio('end');
             return;
         }
         armTimer();
@@ -82,9 +107,7 @@ $("#counter1Button").click(function() {
     else {
         counter1 += 1;
         updateDisplay();
-        wrongSound.stop();
-        wrongSound.seekTo(0);
-        wrongSound.play();
+        playAudio('wrong');
     }
 });
 $("#counter2Button").click(function() {
@@ -95,9 +118,7 @@ $("#counter2Button").click(function() {
     else {
         counter2 += 1;
         updateDisplay();
-        dingSound.stop();
-        dingSound.seekTo(0);
-        dingSound.play();
+        playAudio('ding');
     }
 });
 $("#counter1Button").mousedown(function() { $(this).addClass("pressed"); });

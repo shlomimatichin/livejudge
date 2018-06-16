@@ -1,0 +1,17 @@
+#!/bin/bash
+export PATH=$HOME/android-studio/gradle/gradle-4.4/bin:$PATH
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+export ANDROID_HOME=$HOME/Android/Sdk
+
+# if we are sourcing script name is our shell executable, and not this filename
+scriptname=$(basename $(readlink -f "${0}"))
+shellexecname=$(basename $SHELL)
+if [[ "$scriptname" != "$shellexecname" ]]; then
+	# If nothing is passed in the command line, just enter the user's shell
+	if [ "$#" = "0" ] ; then
+		exec $SHELL
+	else
+		# Non-shell mode
+		exec "$@"
+	fi
+fi
