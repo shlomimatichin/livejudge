@@ -131,3 +131,19 @@ $("#resetButton").click(function() {
     reset();
     updateDisplay();
 });
+
+$("#menu").addClass("hidden");
+$("#menuButton").click(function() {
+    $("#app").addClass("hidden");
+    $("#menu").removeClass("hidden");
+});
+$("#closeMenuButton").click(function() {
+    $("#app").removeClass("hidden");
+    $("#menu").addClass("hidden");
+});
+$("#seconds35").addClass("selected");
+$("#seconds35").click(function() { $(".seconds").removeClass("selected"); $(this).addClass("selected"); timerLength = 35000; });
+$("#seconds40").click(function() { $(".seconds").removeClass("selected"); $(this).addClass("selected"); timerLength = 40000; });
+$("#seconds45").click(function() { $(".seconds").removeClass("selected"); $(this).addClass("selected"); timerLength = 45000; });
+$("#seconds50").click(function() { $(".seconds").removeClass("selected"); $(this).addClass("selected"); timerLength = 50000; });
+$("#seconds55").click(function() { $(".seconds").removeClass("selected"); $(this).addClass("selected"); timerLength = 55000; });
