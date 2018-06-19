@@ -99,7 +99,8 @@ function armTimer() {
     }, 1000 / 60);
 }
 
-$("#counter1Button").click(function() {
+$("#counter1Button").mousedown(function() {
+    $(this).addClass("pressed");
     if (finished)
         return;
     if (startedAt === undefined)
@@ -110,7 +111,8 @@ $("#counter1Button").click(function() {
         playAudio('wrong');
     }
 });
-$("#counter2Button").click(function() {
+$("#counter2Button").mousedown(function() {
+    $(this).addClass("pressed");
     if (finished)
         return;
     if (startedAt === undefined)
@@ -121,9 +123,7 @@ $("#counter2Button").click(function() {
         playAudio('ding');
     }
 });
-$("#counter1Button").mousedown(function() { $(this).addClass("pressed"); });
 $("#counter1Button").mouseup(function() { $(this).removeClass("pressed"); });
-$("#counter2Button").mousedown(function() { $(this).addClass("pressed"); });
 $("#counter2Button").mouseup(function() { $(this).removeClass("pressed"); });
 
 $("#resetButton").click(function() {
