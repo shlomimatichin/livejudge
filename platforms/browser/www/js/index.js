@@ -112,7 +112,7 @@ $("#counter1Button").mousedown(function() {
     }
 });
 $("#counter2Button").mousedown(function() {
-    $("#counter2Button").addClass("pressed");
+    $(this).addClass("pressed");
     if (finished)
         return;
     if (startedAt === undefined)

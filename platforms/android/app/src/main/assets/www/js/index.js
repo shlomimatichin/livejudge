@@ -99,7 +99,8 @@ function armTimer() {
     }, 1000 / 60);
 }
 
-$("#counter1Button").click(function() {
+function counter1Clicked() {
+    $(this).addClass("pressed");
     if (finished)
         return;
     if (startedAt === undefined)
@@ -109,8 +110,9 @@ $("#counter1Button").click(function() {
         updateDisplay();
         playAudio('wrong');
     }
-});
-$("#counter2Button").click(function() {
+}
+function counter2Clicked() {
+    $(this).addClass("pressed");
     if (finished)
         return;
     if (startedAt === undefined)
@@ -120,14 +122,30 @@ $("#counter2Button").click(function() {
         updateDisplay();
         playAudio('ding');
     }
-});
-$("#counter1Button").mousedown(function() { $(this).addClass("pressed"); });
+}
 $("#counter1Button").mouseup(function() { $(this).removeClass("pressed"); });
-$("#counter2Button").mousedown(function() { $(this).addClass("pressed"); });
+$("#counter1Button").mousedown(counter1Clicked);
 $("#counter2Button").mouseup(function() { $(this).removeClass("pressed"); });
+$("#counter2Button").mousedown(counter2Clicked);
 
 $("#resetButton").click(function() {
     clearTimeout(timerHandle);
     reset();
     updateDisplay();
 });
+
+$("#menu").addClass("hidden");
+$("#menuButton").click(function() {
+    $("#app").addClass("hidden");
+    $("#menu").removeClass("hidden");
+});
+$("#closeMenuButton").click(function() {
+    $("#app").removeClass("hidden");
+    $("#menu").addClass("hidden");
+});
+$("#seconds35").addClass("selected");
+$("#seconds35").click(function() { $(".seconds").removeClass("selected"); $(this).addClass("selected"); timerLength = 35000; });
+$("#seconds40").click(function() { $(".seconds").removeClass("selected"); $(this).addClass("selected"); timerLength = 40000; });
+$("#seconds45").click(function() { $(".seconds").removeClass("selected"); $(this).addClass("selected"); timerLength = 45000; });
+$("#seconds50").click(function() { $(".seconds").removeClass("selected"); $(this).addClass("selected"); timerLength = 50000; });
+$("#seconds55").click(function() { $(".seconds").removeClass("selected"); $(this).addClass("selected"); timerLength = 55000; });

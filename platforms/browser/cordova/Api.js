@@ -86,7 +86,7 @@ Api.createPlatform = function (dest, config, options, events) {
     var creator = require('../../lib/create');
     events = setupEvents(events);
 
-    var name = 'HelloCordova';
+    var name = 'LiveJudge';
     var id = 'io.cordova.hellocordova';
     if (config) {
         name = config.name();

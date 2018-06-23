@@ -99,7 +99,7 @@ function armTimer() {
     }, 1000 / 60);
 }
 
-$("#counter1Button").mousedown(function() {
+function counter1Clicked() {
     $(this).addClass("pressed");
     if (finished)
         return;
@@ -110,8 +110,8 @@ $("#counter1Button").mousedown(function() {
         updateDisplay();
         playAudio('wrong');
     }
-});
-$("#counter2Button").mousedown(function() {
+}
+function counter2Clicked() {
     $(this).addClass("pressed");
     if (finished)
         return;
@@ -122,9 +122,11 @@ $("#counter2Button").mousedown(function() {
         updateDisplay();
         playAudio('ding');
     }
-});
+}
 $("#counter1Button").mouseup(function() { $(this).removeClass("pressed"); });
+$("#counter1Button").mousedown(counter1Clicked);
 $("#counter2Button").mouseup(function() { $(this).removeClass("pressed"); });
+$("#counter2Button").mousedown(counter2Clicked);
 
 $("#resetButton").click(function() {
     clearTimeout(timerHandle);
